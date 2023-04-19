@@ -172,7 +172,7 @@ relayers: []
 
 explorer:
   # Flag to enable explorer for cluster
-  enabled: false
+  enabled: true
   type: ping-pub
   image: anmol1696/explorer
   localhost: true
@@ -180,17 +180,17 @@ explorer:
     rest: 8080
 
 faucet:
-  enabled: false
+  enabled: true
 
 registry:
-  enabled: false
+  enabled: true
   image: anmol1696/registry
   ports:
     rest: 6060
     grpc: 7070
 
 collector:
-  enabled: false
+  enabled: true
   image: anmol1696/collector:latest
   localhost: true
   ports:
