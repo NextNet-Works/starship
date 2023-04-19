@@ -5,27 +5,32 @@
 nameOverride: ""
 fullnameOverride: ""
 
-resources: {}
-  # We usually recommend not to specify default resources and to leave this as a conscious
-  # choice for the user. This also increases chances charts run on environments with little
-  # resources, such as Minikube. If you do want to specify resources, uncomment the following
-  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
-  # limits:
-  #   cpu: 100m
-  #   memory: 128Mi
-  # requests:
-  #   cpu: 100m
-  #   memory: 128Mi
-
 nodeSelector: {}
 
 tolerations: []
 
 affinity: {}
 
+resources:
+  init:
+    limits:
+      cpu: "1"
+      memory: "1G"
+    requests:
+      cpu: "0.5"
+      memory: "500M"
+  wait:
+    limits:
+      cpu: "0.5"
+      memory: "500M"
+    requests:
+      cpu: "0.2"
+      memory: "200M"
+
 exposer:
   image: anmol1696/exposer:20230319-e41e51f
-  port: 8081
+  ports:
+    rest: 8081
   resources:
     limits:
       cpu: "0.5"
@@ -108,11 +113,11 @@ defaultRelayers:
   go-relayer:
     image: anmol1696/go-relayer:latest
 
-chains:
+chains: []
   # Examples running chains
-   - name: osmosis-1
-     type: osmosis
-     numValidators: 1
+  # - name: osmosis-1
+  #   type: osmosis
+  #   numValidators: 4
   #   upgrade:
   #     enabled: true
   #     # type will indicate the way in which the upgrade binaries is supposed to be handled
@@ -125,9 +130,9 @@ chains:
   #     upgrades:
   #       - name: v12
   #         version: v12.2.0
-     ports:
-       rpc: 26653
-       rest: 1313
+  #   ports:
+  #     rpc: 26653
+  #     rest: 1313
   # - name: core-1
   #   type: persistencecore
   #   numValidators: 3
@@ -177,7 +182,15 @@ explorer:
   image: anmol1696/explorer
   localhost: true
   ports:
-    rest: 58080
+    rest: 8080
+  resources:
+    limits:
+      cpu: "1"
+      memory: 4Gi
+    requests:
+      cpu: "0.5"
+      memory: 2Gi
+
 
 faucet:
   enabled: false
@@ -188,6 +201,13 @@ registry:
   ports:
     rest: 6060
     grpc: 7070
+  resources:
+    limits:
+      cpu: "1"
+      memory: 2Gi
+    requests:
+      cpu: "0.5"
+      memory: 1Gi
 
 collector:
   enabled: false
@@ -195,3 +215,11 @@ collector:
   localhost: true
   ports:
     rest: 8070
+  resources:
+    limits:
+      cpu: "1"
+      memory: 2Gi
+    requests:
+      cpu: "0.5"
+      memory: 1Gi
+
