@@ -172,7 +172,7 @@ relayers: []
 
 explorer:
   # Flag to enable explorer for cluster
-  enabled: false
+  enabled: true
   type: ping-pub
   image: anmol1696/explorer
   localhost: true
