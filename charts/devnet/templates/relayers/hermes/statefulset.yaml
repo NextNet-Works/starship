@@ -38,9 +38,9 @@ spec:
           imagePullPolicy: Always
           env:
             - name: KEYS_CONFIG
-              value: /keys/keys.json
+              value: "/keys/keys.json"
             - name: RELAYER_DIR
-              value: /root/.hermes
+              value: "/root/.hermes"
           command:
             - bash
             - "-c"
@@ -88,7 +88,7 @@ spec:
           imagePullPolicy: Always
           env:
             - name: RELAYER_DIR
-              value: /root/.hermes
+              value: "/root/.hermes"
           command:
             - bash
             - "-c"

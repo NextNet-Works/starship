@@ -56,13 +56,13 @@ spec:
               {{- end }}
           env:
             - name: CODE_REF
-              value: {{ $defaultChain.repo }}
+              value: "{{ $defaultChain.repo }}"
             - name: UPGRADE_DIR
-              value: {{ $defaultChain.home }}/cosmovisor
+              value: "{{ $defaultChain.home }}/cosmovisor"
             - name: GOBIN
-              value: /go/bin
+              value: "/go/bin"
             - name: CHAIN_NAME
-              value: {{ $chain.name }}
+              value: "{{ $chain.name }}"
             {{ include "devnet.defaultEvnVars" $defaultChain | indent 12 }}
           volumeMounts:
             - mountPath: {{ $defaultChain.home }}
@@ -80,7 +80,7 @@ spec:
             {{- include "devnet.evnVars" $chain | indent 12 }}
             {{- include "devnet.timeoutVars" $.Values | indent 12 }}
             - name: KEYS_CONFIG
-              value: /configs/keys.json
+              value: "/configs/keys.json"
           command:
             - bash
             - "-c"
@@ -156,11 +156,11 @@ spec:
             - name: EXPOSER_GRPC_PORT
               value: "9099"
             - name: EXPOSER_GENESIS_FILE
-              value: {{ $defaultChain.home }}/config/genesis.json
+              value: "{{ $defaultChain.home }}/config/genesis.json"
             - name: EXPOSER_MNEMONIC_FILE
-              value: /configs/keys.json
+              value: "/configs/keys.json"
             - name: EXPOSER_PRIV_VAL_FILE
-              value: {{ $defaultChain.home }}/config/priv_validator_key.json
+              value: "{{ $defaultChain.home }}/config/priv_validator_key.json"
           command: [ "/app/exposer/exposer" ]
           resources: {{- toYaml $.Values.exposer.resources | nindent 12 }}
           volumeMounts:

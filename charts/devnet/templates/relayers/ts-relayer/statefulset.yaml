@@ -38,13 +38,13 @@ spec:
           imagePullPolicy: Always
           env:
             - name: SRC_CHAIN
-              value: {{ index $relayer.chains 0 }}
+              value: "{{ index $relayer.chains 0 }}"
             - name: DEST_CHAIN
-              value: {{ index $relayer.chains 1 }}
+              value: "{{ index $relayer.chains 1 }}"
             - name: RELAYER_DIR
-              value: /root/.ibc-setup
+              value: "/root/.ibc-setup"
             - name: KEYS_CONFIG
-              value: /keys/keys.json
+              value: "/keys/keys.json"
           command:
             - bash
             - "-c"
@@ -78,7 +78,7 @@ spec:
           imagePullPolicy: Always
           env:
             - name: RELAYER_DIR
-              value: /root/.ibc-setup
+              value: "/root/.ibc-setup"
           command:
             - bash
             - "-c"

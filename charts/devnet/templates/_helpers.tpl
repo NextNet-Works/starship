@@ -95,7 +95,7 @@ Environment variables for genesis chain
 - name: GENESIS_HOST
   value: {{ .chain }}-genesis
 - name: GENESIS_PORT
-  value: {{ .port | toString }}
+  value: "{{ .port | toString }}"
 - name: NAMESPACE
   valueFrom:
     fieldRef:

@@ -104,35 +104,35 @@ defaultChains:
     hdPath: m/44'/118'/0'/0/0
     coinType: 118
     repo: https://github.com/persistenceOne/persistenceCore
+  xnet:
+    image: ghcr.io/nextnet-works/xnet:0.1.1
+    home: /root/.xnet
+    binary: xnetd
+    prefix: xnet
+    denom: uxnet
+    coins: 100000000000000uxnet,100000000000000uxnet
+    hdPath: m/44'/118'/0'/0/0
+    coinType: 118
+    repo: https://github.com/nextnet-works/xnet-chain.git
+
 
 defaultRelayers:
   ts-relayer:
     image: anmol1696/ts-relayer:latest
   hermes:
-    image: anmol1696/hermes:latest
+    image: ghcr.io/nextnet-works/hermes:1.4.0
   go-relayer:
     image: anmol1696/go-relayer:latest
 
-chains: []
-  # Examples running chains
-  # - name: osmosis-1
-  #   type: osmosis
-  #   numValidators: 4
-  #   upgrade:
-  #     enabled: true
-  #     # type will indicate the way in which the upgrade binaries is supposed to be handled
-  #     # can be build, docker, fetch
-  #     # build: run build scripts for various versions
-  #     # docker: copy binaries from docker images
-  #     # fetch: fetch binaries directly from github releases
-  #     type: build
-  #     genesis: v11.0.1
-  #     upgrades:
-  #       - name: v12
-  #         version: v12.2.0
-  #   ports:
-  #     rpc: 26653
-  #     rest: 1313
+chains:
+  - name: xnet
+    type: xnet
+    numValidators: 1
+    upgrade:
+      enabled: false
+    ports:
+      rpc: 26653
+      rest: 1313
   # - name: core-1
   #   type: persistencecore
   #   numValidators: 3
@@ -177,9 +177,9 @@ relayers: []
 
 explorer:
   # Flag to enable explorer for cluster
-  enabled: false
+  enabled: true
   type: ping-pub
-  image: anmol1696/explorer
+  image: ghcr.io/nextnet-works/explorer:1.0
   localhost: true
   ports:
     rest: 8080

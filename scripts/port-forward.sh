@@ -14,7 +14,7 @@ function stop_port_forward() {
 # Default values
 CHAIN_RPC_PORT=26657
 CHAIN_LCD_PORT=1317
-EXPLORER_LCD_PORT=8080
+EXPLORER_LCD_PORT=8070
 REGISTRY_LCD_PORT=8080
 REGISTRY_GRPC_PORT=9090
 
@@ -64,7 +64,7 @@ fi
 
 if [[ $(yq -r ".explorer.enabled" $CONFIGFILE) == "true" ]];
 then
-  kubectl port-forward service/explorer 8080:$EXPLORER_LCD_PORT > /dev/null 2>&1 &
+  kubectl port-forward service/explorer 8070:$EXPLORER_LCD_PORT > /dev/null 2>&1 &
   sleep 1
-  color $GREEN "Open the explorer to get started.... http://localhost:8080"
+  color $GREEN "Open the explorer to get started.... http://localhost:8070"
 fi

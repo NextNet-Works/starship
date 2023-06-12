@@ -48,7 +48,7 @@ spec:
             - name: COLLECTOR_ADDR
               value: ":8070"
             - name: COLLECTOR_DIR_PATH
-              value: /opt/collector
+              value: "/opt/collector"
           command: [ "collector" ]
           resources:
             limits:
