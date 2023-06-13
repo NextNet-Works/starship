@@ -42,13 +42,13 @@ exposer:
 # Chain timeouts
 timeouts:
   time_iota_ms: 10
-  timeout_propose: 400ms
-  timeout_propose_delta: 400ms
-  timeout_prevote: 400ms
-  timeout_prevote_delta: 400ms
-  timeout_precommit: 400ms
-  timeout_precommit_delta: 400ms
-  timeout_commit: 800ms
+  timeout_propose: 3s
+  timeout_propose_delta: 500ms
+  timeout_prevote: 1s
+  timeout_prevote_delta: 500ms
+  timeout_precommit: 1s
+  timeout_precommit_delta: 500ms
+  timeout_commit: 5s
 
 # API for interacting with the charts for devnet
 # TODO: need a way to create state reaching jobs, those will run user bash scripts
@@ -105,12 +105,12 @@ defaultChains:
     coinType: 118
     repo: https://github.com/persistenceOne/persistenceCore
   xnet:
-    image: ghcr.io/nextnet-works/xnet:0.1.1
+    image: ghcr.io/nextnet-works/xnet:0.1.0
     home: /root/.xnet
     binary: xnetd
     prefix: xnet
     denom: uxnet
-    coins: 100000000000000uxnet,100000000000000uxnet
+    coins: 100000000000000uxnet
     hdPath: m/44'/118'/0'/0/0
     coinType: 118
     repo: https://github.com/nextnet-works/xnet-chain.git
@@ -125,14 +125,14 @@ defaultRelayers:
     image: anmol1696/go-relayer:latest
 
 chains:
-  - name: xnet
+  - name: xnet-03012023
     type: xnet
-    numValidators: 1
+    numValidators: 3
     upgrade:
       enabled: false
     ports:
-      rpc: 26653
-      rest: 1313
+      rpc: 26657
+      rest: 1317
   # - name: core-1
   #   type: persistencecore
   #   numValidators: 3
@@ -180,9 +180,9 @@ explorer:
   enabled: true
   type: ping-pub
   image: ghcr.io/nextnet-works/explorer:1.0
-  localhost: true
+  localhost: false
   ports:
-    rest: 8080
+    rest: 5173
   resources:
     limits:
       cpu: "1"

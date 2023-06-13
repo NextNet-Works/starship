@@ -10,9 +10,9 @@ spec:
   clusterIP: None
   ports:
     - name: http
-      port: 8070
+      port: 8080
       protocol: TCP
-      targetPort: 8070
+      targetPort: 5173
   selector:
     app.kubernetes.io/name: explorer
 ---
@@ -56,12 +56,12 @@ spec:
               name: explorer-configs
           readinessProbe:
             tcpSocket:
-              port: 8070
+              port: 8080
             initialDelaySeconds: 60
             periodSeconds: 30
           livenessProbe:
             tcpSocket:
-              port: 8070
+              port: 8080
             initialDelaySeconds: 60
             periodSeconds: 30
       volumes:
@@ -84,10 +84,10 @@ data:
     {
       "chain_name": "{{ $chain.name }}",
       "coingecko": "{{ $chain.type }}",
-      "api": "http://{{ $host }}:{{ $chain.ports.rest }}",
+      "api": "http://{{ $chain.name }}-genesis.{{ $.Release.Namespace }}.svc.cluster.local:{{ $chain.ports.rest }}",
       "rpc": [
-        "http://{{ $host }}:{{ $chain.ports.rpc }}",
-        "http://{{ $host }}:{{ $chain.ports.rpc }}"
+        "http://{{ $chain.name }}-genesis.{{ $.Release.Namespace }}.svc.cluster.local:{{ $chain.ports.rpc }}",
+        "http://{{ $chain.name }}-genesis.{{ $.Release.Namespace }}.svc.cluster.local:{{ $chain.ports.rpc }}"
       ],
       "snapshot_provider": "",
       "sdk_version": "0.45.6",
