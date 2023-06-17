@@ -10,7 +10,7 @@ spec:
   clusterIP: None
   ports:
     - name: http
-      port: 8080
+      port: 5173
       protocol: TCP
       targetPort: 5173
   selector:
@@ -42,6 +42,7 @@ spec:
     spec:
       containers:
         - name: explorer
+          args: ["--host", "0.0.0.0"]
           image: {{ .Values.explorer.image }}
           imagePullPolicy: Always
           resources:
@@ -56,14 +57,18 @@ spec:
               name: explorer-configs
           readinessProbe:
             tcpSocket:
-              port: 8080
-            initialDelaySeconds: 60
-            periodSeconds: 30
+              port: 5173
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 5
           livenessProbe:
             tcpSocket:
-              port: 8080
+              port: 5173
             initialDelaySeconds: 60
-            periodSeconds: 30
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 5
       volumes:
         - name: explorer-configs
           configMap:

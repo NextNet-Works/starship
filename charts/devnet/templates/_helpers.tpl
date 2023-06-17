@@ -138,11 +138,11 @@ Returns resources for a validator
 {{ toYaml .resources }}
 {{- else }}
 limits:
-  cpu: "2"
-  memory: "2G"
-requests:
   cpu: "1"
   memory: "1G"
+requests:
+  cpu: "0.5"
+  memory: "0.5G"
 {{- end }}
 {{- end }}
 
